@@ -21,7 +21,7 @@ services:
     links:
       - php-fpm
     networks:
-      frontend:
+      - lookingglass-network
 
 
   php-fpm:
@@ -38,7 +38,7 @@ services:
       - "./conf/php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw"
       - "./data/webapp:/var/www/html:rw"
     networks:
-      frontend:
+      - lookingglass-network
 
 
   iperf:
@@ -53,12 +53,9 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      frontend:
+      - lookingglass-network
 
 
 networks:
-  frontend:
-    enable_ipv6: true
-    ipam:
-      config:
-        - subnet: fd00:cafe:face:feed::/64
+  lookingglass-network:
+    driver: bridge
