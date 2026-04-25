@@ -1,5 +1,4 @@
 ---
-version: "3.9"
 
 services:
   web:
@@ -21,14 +20,13 @@ services:
     links:
       - php-fpm
     networks:
-      frontend:
+      - lookingglass-network
 
 
   php-fpm:
     image: "wydler/lookingglass-php:${DOCKER_HUB_CONTAINER_TAG}"
     container_name: "lookingglass_php-fpm"
     restart: "unless-stopped"
-    user: "33:33"
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -38,7 +36,7 @@ services:
       - "./conf/php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw"
       - "./data/webapp:/var/www/html:rw"
     networks:
-      frontend:
+      - lookingglass-network
 
 
   iperf:
@@ -53,12 +51,9 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      frontend:
+      - lookingglass-network
 
 
 networks:
-  frontend:
-    enable_ipv6: true
-    ipam:
-      config:
-        - subnet: fd00:cafe:face:feed::/64
+  lookingglass-network:
+    driver: bridge
