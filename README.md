@@ -49,11 +49,16 @@ You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/cus
   ```
 5. Make a copy of the file "lg.default.env" named ".env"
   ```
-  cp /opt/containers/lookingglass/lg.default.env /opt/containers/lookingglass/.env
+  cp /opt/containers/lookingglass/.env.example /opt/containers/lookingglass/.env
   ```
-6. Editing lg.env and set your parameters and data. Any change requires an restart of the containers.
-7. Starting application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
-8. Don't forget to test, that the application works successfully (e.g. http(s)://IP-Addresse or FQDN/).
+6. Make a copy of the file "docker-compose.yml.example" named "docker-compose.yml"
+  ```
+  cp /opt/containers/lookingglass/docker-compose.yml.example /opt/containers/lookingglass/docker-compose.yml
+  ```  
+7. Editing .env and set your parameters and data.
+8. Editing docker-compose.yml and set your parameters and data.
+9. Starting application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
+10. Don't forget to test, that the application works successfully (e.g. http(s)://IP-Addresse or FQDN/).
 
 
 ## Update Looking Glass
