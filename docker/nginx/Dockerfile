@@ -23,6 +23,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 ############################
+# nginx configuration
+# Kopiert die angepasste nginx Konfiguration
+# direkt in das Standard nginx config Verzeichnis
+############################
+COPY rootfs/nginx/etc/nginx/ /etc/nginx/
+    
+############################
 # Entrypoint scripts
 ############################
 COPY --chmod=755 /docker/nginx/99-lookingglass-config.sh /docker-entrypoint.d/
