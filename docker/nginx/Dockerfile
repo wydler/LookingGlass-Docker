@@ -20,6 +20,7 @@ LABEL maintainer="Daniel Wydler" \
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     sqlite3 \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 ############################
