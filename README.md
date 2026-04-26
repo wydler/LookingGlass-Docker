@@ -42,32 +42,26 @@ You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/cus
    git clone https://github.com/dwydler/LookingGlass-Docker.git /opt/containers/lookingglass
    git -C /opt/containers/lookingglass checkout $(git -C /opt/containers/lookingglass tag | tail -1)
   ```
-4. Download dependencies:
-  ```
-   git -C /opt/containers/lookingglass submodule update --init --recursive
-   git -C /opt/containers/lookingglass/data/webapp checkout $(git -C /opt/containers/lookingglass/data/webapp tag | tail -1)
-  ```
-5. Make a copy of the file "lg.default.env" named ".env"
+4. Make a copy of the file "lg.default.env" named ".env"
   ```
   cp /opt/containers/lookingglass/.env.example /opt/containers/lookingglass/.env
   ```
-6. Make a copy of the file "docker-compose.yml.example" named "docker-compose.yml"
+5. Make a copy of the file "docker-compose.yml.example" named "docker-compose.yml"
   ```
   cp /opt/containers/lookingglass/docker-compose.yml.example /opt/containers/lookingglass/docker-compose.yml
   ```  
-7. Editing .env and set your parameters and data.
-8. Editing docker-compose.yml and set your parameters and data.
-9. Starting application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
-10. Don't forget to test, that the application works successfully (e.g. http(s)://IP-Addresse or FQDN/).
+6. Editing .env and set your parameters and data.
+7. Editing docker-compose.yml and set your parameters and data.
+8. Starting application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
+9. Don't forget to test, that the application works successfully (e.g. http(s)://IP-Addresse or FQDN/).
 
 
 ## Update Looking Glass
 1. When you're ready to update the code, you can checkout the latest tag:
   ```
-   ( cd /opt/containers/lookingglass && git fetch && git checkout $(git tag | tail -1) )
-   ( cd /opt/containers/lookingglass/data/webapp && git fetch && git checkout $(git tag | tail -1) )
+  ( cd /opt/containers/lookingglass && git fetch && git checkout $(git tag | tail -1) )
   ```
-2. No restart needed. The changes will take effect immediately.
+2. A restart needed. The changes will take effect immediately.
 
 
 ## License
