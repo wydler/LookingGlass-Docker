@@ -1,0 +1,95 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    'helpers:pinGitHubActionDigests',
+  ],
+  commitMessagePrefix: 'chore(deps):',
+  timezone: 'Europe/Berlin',
+  prHourlyLimit: 0,
+  prConcurrentLimit: 0,
+  automerge: false,
+  enabledManagers: [
+    'github-actions',
+    'dockerfile',
+  ],
+
+  packageRules: [
+    {
+      // ===========================================================================
+      // Aktiviert Renovate-Regeln für Docker-basierte Dependencies
+      // ===========================================================================  
+      matchCategories: [
+        'docker',
+      ],
+      enabled: true,
+    },
+    {
+      // ===========================================================================
+      // GitHub Actions
+      // ===========================================================================  
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '*',
+      ],
+      labels: [
+        'dependencies',
+        'github_actions',
+      ],
+      draftPR: true,
+      additionalBranchPrefix: 'github_action/',
+      branchTopic: '{{depNameSanitized}}-{{#if newVersion}}{{newVersion}}{{else}}{{currentValue}}-{{newDigest}}{{/if}}',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '{{#if newVersion}}from {{currentVersion}} to {{newVersion}}{{else}}{{newValue}} from {{currentDigestShort}} to {{newDigestShort}}{{/if}}',
+    },
+    {
+      // ===========================================================================
+      // Docker Repository - Alpine, Nginx
+      // =========================================================================== 
+      matchDatasources: [
+        'docker',
+      ],
+      matchPackageNames: [
+        'alpine',
+        'nginx',
+      ],
+      versioning: 'docker',
+      ignoreUnstable: true,
+      pinDigests: true,
+      labels: [
+        'dependencies',
+        'docker',
+      ],
+      draftPR: true,
+      additionalBranchPrefix: 'docker/',
+      branchTopic: '{{depNameSanitized}}-{{#if newVersion}}{{newVersion}}{{else}}{{currentValue}}-{{newDigest}}{{/if}}',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '{{#if newVersion}}from {{currentVersion}} to {{newVersion}}{{else}}{{newValue}} from {{currentDigestShort}} to {{newDigestShort}}{{/if}}',
+    },
+    {
+      // ===========================================================================
+      // Docker Repository - PHP FPM
+      // =========================================================================== 
+      matchDatasources: [
+        'docker',
+      ],
+      matchPackageNames: [
+        'php',
+      ],
+      versioning: 'regex:^(?<major>8)\\.(?<minor>4)\\.(?<patch>\\d+)-fpm$',
+      ignoreUnstable: true,
+      pinDigests: true,
+      labels: [
+        'dependencies',
+        'docker',
+      ],
+      draftPR: true,
+      additionalBranchPrefix: 'docker/',
+      branchTopic: '{{depNameSanitized}}-{{#if newVersion}}{{newVersion}}{{else}}{{currentValue}}-{{newDigest}}{{/if}}',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '{{#if newVersion}}from {{currentVersion}} to {{newVersion}}{{else}}{{newValue}} from {{currentDigestShort}} to {{newDigestShort}}{{/if}}',
+    },
+  ],
+}
