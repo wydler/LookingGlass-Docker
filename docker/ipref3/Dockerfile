@@ -9,8 +9,8 @@ FROM alpine:3.23.4@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a
 LABEL maintainer="Daniel Wydler" \
       org.opencontainers.image.authors="Daniel Wydler" \
       org.opencontainers.image.description="A user-friendly PHP Looking Glass - Reloaded" \
-      org.opencontainers.image.documentation="https://github.com/dwydler/LookingGlass-Docker/blob/master/README.md" \
-      org.opencontainers.image.source="https://github.com/dwydler/LookingGlass-Docker" \
+      org.opencontainers.image.documentation="https://github.com/wydler/LookingGlass-Docker/blob/master/README.md" \
+      org.opencontainers.image.source="https://github.com/wydler/LookingGlass-Docker" \
       org.opencontainers.image.title="lookingglass-iperf" \
       org.opencontainers.image.url="https://hub.docker.com/r/wydler/lookingglass-iperf"
 
