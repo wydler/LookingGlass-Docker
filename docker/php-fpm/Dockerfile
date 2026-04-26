@@ -9,8 +9,8 @@ FROM php:8.4.20-fpm@sha256:eec2a132b91271dcf51e86119311ec4b22105736af704997a6905
 LABEL maintainer="Daniel Wydler" \
       org.opencontainers.image.authors="Daniel Wydler" \
       org.opencontainers.image.description="A user-friendly PHP Looking Glass - Reloaded" \
-      org.opencontainers.image.documentation="https://github.com/dwydler/LookingGlass-Docker/blob/master/README.md" \
-      org.opencontainers.image.source="https://github.com/dwydler/LookingGlass-Docker" \
+      org.opencontainers.image.documentation="https://github.com/wydler/LookingGlass-Docker/blob/master/README.md" \
+      org.opencontainers.image.source="https://github.com/wydler/LookingGlass-Docker" \
       org.opencontainers.image.title="lookingglass-php" \
       org.opencontainers.image.url="https://hub.docker.com/r/wydler/lookingglass-php"
 
