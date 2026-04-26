@@ -30,7 +30,7 @@ RUN apt-get update \
 ############################
 # PHP extensions
 ############################
-RUN docker-php-ext-install -j$(nproc) gettext
+RUN docker-php-ext-install -j"$(nproc)" gettext
 
 ############################
 # Locale configuration
