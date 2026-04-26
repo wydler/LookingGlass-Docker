@@ -1,4 +1,5 @@
 # LookingGlass
+[![Docker Image Version (tag latest)](https://img.shields.io/docker/v/wydler/lookingglass-web/latest)](https://hub.docker.com/r/wydler/lookingglass-web) [![Docker Image Size (tag latest)](https://img.shields.io/docker/image-size/wydler/lookingglass-web/latest)](https://hub.docker.com/r/wydler/lookingglass-web) [![Docker Pulls](https://img.shields.io/docker/pulls/wydler/lookingglass-web)](https://hub.docker.com/r/wydler/lookingglass-web) [![Docker Stars](https://img.shields.io/docker/stars/wydler/lookingglass-web)](https://hub.docker.com/r/wydler/lookingglass-web)
 
 ## Overview
 LookingGlass is a user-friendly PHP based looking glass that allows the public (via a web interface) to execute network commands on behalf of your server.
