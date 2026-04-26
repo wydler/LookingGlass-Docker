@@ -28,7 +28,7 @@ You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/cus
 ## Install Docker, download containers und configure Looking Glass
 1. This script will install docker and containerd:
   ```
-    curl https://raw.githubusercontent.com/dwydler/LookingGlass-Docker/master/misc/01-docker.io-installation.sh | bash
+    curl https://raw.githubusercontent.com/wydler/LookingGlass-Docker/master/misc/01-docker.io-installation.sh | bash
   ```
 2. For IPv6 support, edit the Docker daemon configuration file, located at /etc/docker/daemon.json. Configure the following parameters and run `systemctl restart docker.service` to restart docker:
   ```
@@ -39,7 +39,7 @@ You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/cus
   ```
 3. Clone the repository to the correct folder for docker container:
   ```
-   git clone https://github.com/dwydler/LookingGlass-Docker.git /opt/containers/lookingglass
+   git clone https://github.com/wydler/LookingGlass-Docker.git /opt/containers/lookingglass
    git -C /opt/containers/lookingglass checkout $(git -C /opt/containers/lookingglass tag | tail -1)
   ```
 4. Make a copy of the file "lg.default.env" named ".env"
