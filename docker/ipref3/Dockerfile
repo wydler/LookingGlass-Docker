@@ -1,7 +1,7 @@
 ############################
 # Stage 1: Runtime
 ############################
-FROM alpine:3.24.1@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+FROM alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
 
 ############################
 # Metadata
@@ -27,12 +27,12 @@ RUN apk add --no-cache \
 # - no home directory
 # - no login shell
 ############################
-RUN adduser -D -H -s /sbin/nologin iperf
+RUN adduser -D -H -s /sbin/nologin -u 10001 iperf
 
 ############################
 # Switch to non-root user
 ############################
-USER iperf
+USER 10001
     
 ############################
 # iperf3 default port
@@ -54,7 +54,7 @@ ENTRYPOINT ["iperf3"]
 # Instead we check if process is running
 ############################
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
-  CMD pgrep iperf3 > /dev/null || exit 1
+  CMD ["pgrep", "iperf3"]
 
 # iperf3 -s = run in Server mode
 CMD ["-s"]
