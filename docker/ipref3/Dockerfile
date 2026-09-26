@@ -54,7 +54,7 @@ ENTRYPOINT ["iperf3"]
 # Instead we check if process is running
 ############################
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
-  CMD pgrep iperf3 > /dev/null || exit 1
+  CMD ["pgrep", "iperf3"]
 
 # iperf3 -s = run in Server mode
 CMD ["-s"]
