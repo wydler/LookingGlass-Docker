@@ -27,7 +27,7 @@ RUN apk add --no-cache \
 # - no home directory
 # - no login shell
 ############################
-RUN adduser -D -H -s /sbin/nologin iperf
+RUN adduser -D -H -s /sbin/nologin -u 10001 iperf
 
 ############################
 # Switch to non-root user
