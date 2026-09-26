@@ -32,7 +32,7 @@ RUN adduser -D -H -s /sbin/nologin -u 10001 iperf
 ############################
 # Switch to non-root user
 ############################
-USER iperf
+USER 10001
     
 ############################
 # iperf3 default port
