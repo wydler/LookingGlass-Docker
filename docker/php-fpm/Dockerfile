@@ -1,7 +1,7 @@
 ############################
 # Stage 1: Runtime
 ############################
-FROM php:8.4.26-fpm@sha256:b0d7dff8f2d57155aebb5150dfcb5056a8c8d977aac3c2e21cfce32b8a4b004d
+FROM php:8.4.26-fpm@sha256:1071b5609d16d60674f78eea8cf9bd7e9e79169ecb566d015c931c5ee789bb13
 
 ############################
 # Metadata
