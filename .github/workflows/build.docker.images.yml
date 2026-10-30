@@ -111,3 +111,5 @@ jobs:
           platforms: ${{ env.REGISTRY_PLATFORMS }}
           cache-from: type=registry,ref=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}-${{ matrix.image }}:${{ env.REGISTRY_REPO_TAG_CACHE_NAME }}
           cache-to: type=registry,ref=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}-${{ matrix.image }}:${{ env.REGISTRY_REPO_TAG_CACHE_NAME }},mode=max
+          sbom: true
+          provenance: mode=max
