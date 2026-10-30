@@ -123,4 +123,3 @@ jobs:
           docker buildx imagetools create \
             -t "${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:latest" \
             ${{ steps.tags.outputs.docker }}
-          
