@@ -49,7 +49,7 @@
       ignoreUnstable: true,
       labels: [
         'dependencies',
-        'lookingglass',
+        'apps',
       ],
       draftPR: true,
       additionalBranchPrefix: 'lookingglass/',
