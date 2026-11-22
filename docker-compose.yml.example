@@ -13,7 +13,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
       - "./data/nginx/logs:/var/log/nginx:rw"
-      - "www-data:/var/www/html"
+      - "./data/lookingglass:/var/lib/lookingglass:rw"
     env_file:
       - .env
     networks:
@@ -30,7 +30,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
       - "./data/php-fpm/logs:/var/log:rw"
-      - "www-data:/var/www/html"
+      - "./data/lookingglass:/var/lib/lookingglass:rw"
     networks:
       - lookingglass-network
 
@@ -48,10 +48,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - lookingglass-network
-
-
-volumes:
-  www-data:
 
 
 networks:
