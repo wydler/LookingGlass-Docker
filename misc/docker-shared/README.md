@@ -19,7 +19,7 @@ Docker-APT-Repository.
 Vom Repository-Hauptverzeichnis aus ausfuehren:
 
 ```bash
-bash scripts/linux/docker/01-docker-installation.sh
+bash misc/docker-shared/01-docker-installation.sh
 ```
 
 Das Skript richtet das offizielle Docker-APT-Repository ein und installiert
