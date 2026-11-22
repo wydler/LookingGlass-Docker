@@ -8,6 +8,7 @@ name: Tools - Docker Build Test
       - "master"
     paths:
       - '**Dockerfile'
+      - 'docker/lookingglass.version'
 
 permissions:
   contents: read
@@ -23,7 +24,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [ipref3, nginx, php-fpm]
+        include:
+          - dockerfile: Dockerfile
+            target: web
+          - dockerfile: Dockerfile
+            target: php
+          - dockerfile: ipref3/Dockerfile
+            target: iperf
 
     steps:
       - name: Checkout Repository
@@ -36,5 +43,6 @@ jobs:
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
         with:
           context: .
-          file: ./docker/${{ matrix.dockerfile }}/Dockerfile
+          file: ./docker/${{ matrix.dockerfile }}
+          target: ${{ matrix.target }}
           platforms: ${{ env.REGISTRY_PLATFORMS }}

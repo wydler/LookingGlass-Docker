@@ -61,13 +61,16 @@ jobs:
       matrix:
         include:
           - image: web
-            dockerfile: nginx
+            dockerfile: Dockerfile
+            target: web
 
           - image: php
-            dockerfile: php-fpm
+            dockerfile: Dockerfile
+            target: php
 
           - image: iperf
-            dockerfile: ipref3
+            dockerfile: ipref3/Dockerfile
+            target: iperf
 
     steps:
       - name: Checkout
@@ -106,7 +109,8 @@ jobs:
         id: build
         with:
           context: .
-          file: ./docker/${{ matrix.dockerfile }}/Dockerfile
+          file: ./docker/${{ matrix.dockerfile }}
+          target: ${{ matrix.target }}
           push: true
           tags: ${{ steps.tags.outputs.docker }}
           platforms: ${{ env.REGISTRY_PLATFORMS }}

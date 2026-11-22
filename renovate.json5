@@ -15,9 +15,48 @@
   enabledManagers: [
     'github-actions',
     'dockerfile',
+    'custom.regex',
+  ],
+
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        'docker/lookingglass.version',
+      ],
+      matchStrings: [
+        '(?<currentValue>\\S+)',
+      ],
+      depNameTemplate: 'wydler/LookingGlass',
+      packageNameTemplate: 'wydler/LookingGlass',
+      datasourceTemplate: 'github-tags',
+      versioningTemplate: 'semver',
+    },
   ],
 
   packageRules: [
+    {
+      // ===========================================================================
+      // LookingGlass GitHub Tags
+      // ===========================================================================
+      matchDatasources: [
+        'github-tags',
+      ],
+      matchPackageNames: [
+        'wydler/LookingGlass',
+      ],
+      versioning: 'semver',
+      ignoreUnstable: true,
+      labels: [
+        'dependencies',
+        'lookingglass',
+      ],
+      draftPR: true,
+      additionalBranchPrefix: 'lookingglass/',
+      branchTopic: '{{depNameSanitized}}-{{#if newVersion}}{{newVersion}}{{else}}{{currentValue}}-{{newDigest}}{{/if}}',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '{{#if newVersion}}from {{currentVersion}} to {{newVersion}}{{else}}{{newValue}} from {{currentDigestShort}} to {{newDigestShort}}{{/if}}',
+    },
     {
       // ===========================================================================
       // Aktiviert Renovate-Regeln für Docker-basierte Dependencies

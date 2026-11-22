@@ -115,8 +115,8 @@ function database() {
 	echo
 
 	# Set permissions for folder and database file
-	echo "Set permission for folder '$DIR'."
-	chown www-data:www-data "${DIR}"
+	echo "Set permission for persistent LookingGlass data."
+	chown www-data:www-data "$STATE_DIR"
 
 	echo "Set permission for 'ratelimit.db'."
 	chown www-data:www-data ratelimit.db
@@ -197,6 +197,8 @@ EOF
 # Global vars
 CONFIG='Config.php'
 DIR="/var/www/html/LookingGlass/"
+STATE_DIR="/var/lib/lookingglass"
+LEGACY_STATE_DIR="$STATE_DIR/LookingGlass"
 
 echo "Checking if folder '$DIR' exist..."
 while [[ ! -d "$DIR/" ]]; do
@@ -207,6 +209,35 @@ done
 echo "Found the mentioned directory."
 cd "$DIR"
 echo
+
+if ! mkdir -p "$STATE_DIR"; then
+	echo "Failed to create persistent LookingGlass data directory '$STATE_DIR'." >&2
+	exit 1
+fi
+
+if [ -d "$LEGACY_STATE_DIR" ]; then
+	if [ -f "$LEGACY_STATE_DIR/ratelimit.db" ]; then
+		if [ -e "$STATE_DIR/ratelimit.db" ]; then
+			echo "Both legacy and current rate-limit databases exist; refusing to overwrite either." >&2
+			exit 1
+		fi
+		if ! mv "$LEGACY_STATE_DIR/ratelimit.db" "$STATE_DIR/ratelimit.db"; then
+			echo "Failed to migrate the legacy rate-limit database." >&2
+			exit 1
+		fi
+	fi
+
+	if [ -f "$LEGACY_STATE_DIR/Config.php" ] && [ ! -e "$STATE_DIR/Config.php" ]; then
+		if ! mv "$LEGACY_STATE_DIR/Config.php" "$STATE_DIR/Config.php"; then
+			echo "Failed to migrate the legacy configuration file." >&2
+			exit 1
+		fi
+	fi
+
+	if ! rmdir "$LEGACY_STATE_DIR"; then
+		echo "Legacy data directory '$LEGACY_STATE_DIR' is not empty; leaving remaining files untouched." >&2
+	fi
+fi
 
 IPV4=${lg_ip4_address}
 IPV6=${lg_ip6_address}
