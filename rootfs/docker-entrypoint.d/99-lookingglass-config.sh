@@ -115,8 +115,8 @@ function database() {
 	echo
 
 	# Set permissions for folder and database file
-	echo "Set permission for folder '$DIR'."
-	chown www-data:www-data "${DIR}"
+	echo "Set permission for persistent LookingGlass data."
+	chown www-data:www-data /var/lib/lookingglass/LookingGlass
 
 	echo "Set permission for 'ratelimit.db'."
 	chown www-data:www-data ratelimit.db
