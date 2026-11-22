@@ -30,9 +30,9 @@ RUN apt-get update \
 COPY --from=lookingglass-source /usr/src/lookingglass/ /var/www/html/
 
 RUN rm -f /var/www/html/index.html \
-    && mkdir -p /var/lib/lookingglass/LookingGlass \
-    && ln -s /var/lib/lookingglass/LookingGlass/Config.php /var/www/html/LookingGlass/Config.php \
-    && ln -s /var/lib/lookingglass/LookingGlass/ratelimit.db /var/www/html/LookingGlass/ratelimit.db
+    && mkdir -p /var/lib/lookingglass \
+    && ln -s /var/lib/lookingglass/Config.php /var/www/html/LookingGlass/Config.php \
+    && ln -s /var/lib/lookingglass/ratelimit.db /var/www/html/LookingGlass/ratelimit.db
 
 COPY rootfs/nginx/etc/nginx/ /etc/nginx/
 COPY --chmod=755 rootfs/docker-entrypoint.d/ /docker-entrypoint.d/
@@ -66,9 +66,9 @@ RUN docker-php-ext-install -j"$(nproc)" gettext
 
 COPY --from=lookingglass-source /usr/src/lookingglass/ /var/www/html/
 
-RUN mkdir -p /var/lib/lookingglass/LookingGlass \
-    && ln -s /var/lib/lookingglass/LookingGlass/Config.php /var/www/html/LookingGlass/Config.php \
-    && ln -s /var/lib/lookingglass/LookingGlass/ratelimit.db /var/www/html/LookingGlass/ratelimit.db
+RUN mkdir -p /var/lib/lookingglass \
+    && ln -s /var/lib/lookingglass/Config.php /var/www/html/LookingGlass/Config.php \
+    && ln -s /var/lib/lookingglass/ratelimit.db /var/www/html/LookingGlass/ratelimit.db
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen \
