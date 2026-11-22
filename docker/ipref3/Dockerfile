@@ -19,7 +19,7 @@ LABEL maintainer="Daniel Wydler" \
 #############################################
 RUN apk add --no-cache \
       iperf3 \
-  && rm -rf /var/cache/apk/*
+      procps-ng
 
 ############################
 # Security hardening
