@@ -1,7 +1,7 @@
 #!/bin/bash
 
 wwwpath=/var/www/html
-gitrepo=https://github.com/dwydler/LookingGlass.git
+gitrepo=https://github.com/wydler/LookingGlass.git
 lgversion=2.0.3
 
 if [ -z "$(find $wwwpath -mindepth 1 -print -quit)" ]; then
