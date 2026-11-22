@@ -4,7 +4,7 @@
 ## Overview
 LookingGlass is a user-friendly PHP based looking glass that allows the public (via a web interface) to execute network commands on behalf of your server.
 
-This is a port of the native [Looking Glass application](https://github.com/dwydler/LookingGlass/tree/customize) into docker images.
+This is a port of the native [Looking Glass application](https://github.com/wydler/LookingGlass/tree/customize) into docker images.
 
 
 ## Demo
@@ -14,11 +14,11 @@ Demo is running on a Cloud Server of Hetzner Online GmbH.
 
 
 ## Features
-You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/customize). 
+You can find an overview [here](https://github.com/wydler/LookingGlass/tree/customize).
 
 
 ## Implemented commands
-You can find an overview [here](https://github.com/dwydler/LookingGlass/tree/customize). 
+You can find an overview [here](https://github.com/wydler/LookingGlass/tree/customize).
 
 
 ## Requirements
