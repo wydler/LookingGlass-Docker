@@ -23,11 +23,12 @@ You can find an overview [here](https://github.com/wydler/LookingGlass/tree/cust
 
 ## Requirements
 * Docker & Docker Compose V2
+* Git
 * SSH/Terminal access (able to install commands/functions if non-existent)
 
 
-## Install Docker, download containers und configure Looking Glass
-1. This script will install docker and containerd:
+## Install Docker and configure LookingGlass
+1. Install Docker and containerd:
   ```
     curl https://raw.githubusercontent.com/wydler/LookingGlass-Docker/master/misc/01-docker.io-installation.sh | bash
   ```
@@ -43,28 +44,51 @@ You can find an overview [here](https://github.com/wydler/LookingGlass/tree/cust
    git clone https://github.com/wydler/LookingGlass-Docker.git /opt/containers/lookingglass
    git -C /opt/containers/lookingglass checkout $(git -C /opt/containers/lookingglass tag | tail -1)
   ```
-4. Make a copy of the file "lg.default.env" named ".env"
+4. Copy `.env.example` to `.env`:
   ```
   cp /opt/containers/lookingglass/.env.example /opt/containers/lookingglass/.env
   ```
-5. Make a copy of the file "docker-compose.yml.example" named "docker-compose.yml"
+5. Copy `docker-compose.yml.example` to `docker-compose.yml`:
   ```
   cp /opt/containers/lookingglass/docker-compose.yml.example /opt/containers/lookingglass/docker-compose.yml
   ```  
-6. Editing .env and set your parameters and data.
-7. Editing docker-compose.yml and set your parameters and data.
-8. Starting application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
-9. Don't forget to test, that the application works successfully (e.g. http(s)://IP-Addresse or FQDN/).
+6. Edit `.env` and set your LookingGlass settings.
+7. Edit `docker-compose.yml` if needed.
+8. Start the application with `docker compose -f /opt/containers/lookingglass/docker-compose.yml up -d`.
+9. Verify that the application works (for example, by opening its IP address or FQDN in a browser).
 
 
 ## Update Looking Glass
-1. When you're ready to update the code, you can checkout the latest tag:
+LookingGlass is pinned in `docker/lookingglass.version` and included in the web and PHP images during the Docker build. After images containing the desired version have been published, update the container images.
+
+Set `DOCKER_HUB_CONTAINER_TAG` in `.env` to the published image tag you want to use, then pull and restart the containers:
+
   ```
-  ( cd /opt/containers/lookingglass && git fetch && git checkout $(git tag | tail -1) )
+  cd /opt/containers/lookingglass
+  docker compose -f docker-compose.yml pull
+  docker compose -f docker-compose.yml up -d
   ```
-2. A restart needed. The changes will take effect immediately.
+
+Persistent data and logs are stored under `./data`: LookingGlass state in `data/lookingglass`, Nginx logs in `data/nginx/logs`, and PHP-FPM logs in `data/php-fpm/logs`. To move the installation, copy `docker-compose.yml`, `.env`, and the `data` directory to the new server.
+
+For existing installations using the named volume `www-data`, migrate its rate-limit database before switching to the bind mount:
+1. Stop the containers without deleting volumes:
+   ```
+   docker compose -f docker-compose.yml down
+   ```
+2. Find the existing volume name:
+   ```
+   docker volume ls --filter label=com.docker.compose.volume=www-data
+   ```
+3. Copy the database into `data/lookingglass` (replace `<old-volume-name>` with the listed name):
+   ```
+   mkdir -p data/lookingglass
+   docker run --rm -v <old-volume-name>:/source:ro -v "$PWD/data/lookingglass:/target" alpine:3.24.4 sh -c 'if [ -f /source/LookingGlass/ratelimit.db ]; then cp -a /source/LookingGlass/ratelimit.db /target/; fi'
+   ```
+
+If the database is already in `data/lookingglass/LookingGlass`, the first startup moves it to `data/lookingglass/`; `Config.php` is regenerated from `.env`. Keep the old Docker volume until the new setup is verified; do not use `docker compose down -v` during migration.
 
 
 ## License
-Code is licensed under MIT Public License.  
+Code is licensed under the MIT License.
 If you wish to support my efforts, keep the "Powered by LookingGlass" link intact.
