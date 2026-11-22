@@ -116,7 +116,7 @@ function database() {
 
 	# Set permissions for folder and database file
 	echo "Set permission for persistent LookingGlass data."
-	chown www-data:www-data /var/lib/lookingglass/LookingGlass
+	chown www-data:www-data "$STATE_DIR"
 
 	echo "Set permission for 'ratelimit.db'."
 	chown www-data:www-data ratelimit.db
@@ -197,6 +197,7 @@ EOF
 # Global vars
 CONFIG='Config.php'
 DIR="/var/www/html/LookingGlass/"
+STATE_DIR="/var/lib/lookingglass/LookingGlass"
 
 echo "Checking if folder '$DIR' exist..."
 while [[ ! -d "$DIR/" ]]; do
@@ -207,6 +208,11 @@ done
 echo "Found the mentioned directory."
 cd "$DIR"
 echo
+
+if ! mkdir -p "$STATE_DIR"; then
+	echo "Failed to create persistent LookingGlass data directory '$STATE_DIR'." >&2
+	exit 1
+fi
 
 IPV4=${lg_ip4_address}
 IPV6=${lg_ip6_address}
