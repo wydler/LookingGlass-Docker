@@ -4,7 +4,7 @@
 mkdir -p /opt/containers/
 
 # Clone repository to local folder
-git clone https://github.com/dwydler/LookingGlass-Docker.git /opt/containers/lookingglass
+git clone https://github.com/wydler/LookingGlass-Docker.git /opt/containers/lookingglass
 
 # Switch to the latest release
 git -C /opt/containers/lookingglass checkout $(git -C /opt/containers/lookingglass tag | tail -1)
