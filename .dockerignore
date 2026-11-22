@@ -1,0 +1,21 @@
+# Source control and editor files
+.git
+.github
+.vscode
+
+# Local configuration and persistent runtime data
+.env
+.env.*
+docker-compose.yml
+compose.yaml
+data/
+
+# Files not used by the image builds
+.gitignore
+.yamllint
+CHANGELOG.md
+LICENSE
+README.md
+cosign.pub
+misc/
+renovate.json5
