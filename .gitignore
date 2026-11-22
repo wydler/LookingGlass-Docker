@@ -7,3 +7,6 @@
 # Ignore the docker-compose file (contains local configuration and sensitive data)
 docker-compose.yml
 compose.yaml
+
+# Ignore persistent runtime data and logs
+data/
