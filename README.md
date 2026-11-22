@@ -30,7 +30,7 @@ You can find an overview [here](https://github.com/wydler/LookingGlass/tree/cust
 ## Install Docker and configure LookingGlass
 1. Install Docker and containerd:
   ```
-    curl https://raw.githubusercontent.com/wydler/LookingGlass-Docker/master/misc/01-docker.io-installation.sh | bash
+    curl https://raw.githubusercontent.com/wydler/LookingGlass-Docker/master/misc/docker-shared/01-docker-installation.sh | bash
   ```
 2. For IPv6 support, edit the Docker daemon configuration file, located at /etc/docker/daemon.json. Configure the following parameters and run `systemctl restart docker.service` to restart docker:
   ```
