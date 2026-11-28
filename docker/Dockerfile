@@ -42,7 +42,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ############################
 # Stage 3: PHP-FPM image
 ############################
-FROM php:8.4.28-fpm@sha256:495ab94788034640ddd6fb313476e75570261622c42704e5ae02047b8d934ea0 AS php
+FROM php:8.4.28-fpm@sha256:89598ce2b089ebe8dd3772f7188a2d47300145fbcea6578de2db96c8e8f026bb AS php
 
 LABEL maintainer="Daniel Wydler" \
       org.opencontainers.image.authors="Daniel Wydler" \
