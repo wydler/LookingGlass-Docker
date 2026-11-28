@@ -1,7 +1,7 @@
 ############################
 # Stage 1: LookingGlass source
 ############################
-FROM --platform=$BUILDPLATFORM nginx:1.31.9@sha256:84f7876d21d154885f99554d7ae325d8c2213f9169726ea7ab60642f2573a787 AS lookingglass-source
+FROM --platform=$BUILDPLATFORM nginx:1.31.10@sha256:a786635fd3c7b9a57ea089ab1c0713e510f3b548b65fe699ce3d59e4a926b37e AS lookingglass-source
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git \
@@ -13,7 +13,7 @@ RUN git clone --depth 1 --branch "$(cat /tmp/lookingglass.version)" https://gith
 ############################
 # Stage 2: Nginx web image
 ############################
-FROM nginx:1.31.9@sha256:84f7876d21d154885f99554d7ae325d8c2213f9169726ea7ab60642f2573a787 AS web
+FROM nginx:1.31.10@sha256:a786635fd3c7b9a57ea089ab1c0713e510f3b548b65fe699ce3d59e4a926b37e AS web
 
 LABEL maintainer="Daniel Wydler" \
       org.opencontainers.image.authors="Daniel Wydler" \
